@@ -11,7 +11,7 @@ class Mensajes {
 
 const listaMensajes = [];
 
-const formulario = document.getElementById("formMensajes");
+const formulario = document.querySelector("#formMensajes");
 formulario.addEventListener("submit", agregarMensaje);
 
 function agregarMensaje(event) {

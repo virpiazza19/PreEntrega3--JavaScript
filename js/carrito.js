@@ -1,5 +1,5 @@
 //Productos
-const tapetes = [
+const Tapetes = [
     {
         id: "tapete00001",
         nombre: "Alfombra Panaderos",
@@ -42,26 +42,27 @@ const tapetesSeleccionados = [];
 let cantidadTotal = 0;
 
 const verTapete = ({ id, nombre, stock, imagen }) => {
+
     const contenedorTarjetas = document.querySelector("#contenedorTarjetas");
     const divItem = document.createElement("div");
+
     divItem.setAttribute("data-aos", "zoom-in");
     divItem.className = "items";
-    divItem.innerHTML = `<img class="fotosProductos"
-    src="${imagen}"
-    alt="${nombre}">
-  <form class="formProducto" id="${id}">
-    <input type="number" class="form-control" name="unidades" placeholder="unidades" min="1" max="${stock}">
-    <button type="submit" class="button carritoButton">Agregar</button>
-  </form>`;
+    divItem.innerHTML = `<img class="fotosProductos" src="${imagen}" alt="${nombre}">
+                        <h5 class="tituloItem">${nombre}</h5>
+                        <form class="formProducto" id="${id}">
+                            <input type="number" class="form-control" name="unidades" placeholder="unidades" min="1" max="${stock}">
+                            <button type="submit" class="button carritoButton" id="agregarAlCarrito">Agregar</button>
+                        </form>`;
 
-    contenedorTarjetas.appendChild(divItem);
+    contenedorTarjetas.appendChild(divItem); 
 };
 
-const verTapetes = () => {
+const mostrarTapetes = () => {
     const contenedorTarjetas = document.querySelector("#contenedorTarjetas");
-    contenedorTarjetas.innerHTML = ""; // Limpiar el contenedor antes de volver a agregar los productos
+    contenedorTarjetas.innerHTML = "";
 
-    tapetes.forEach((tapete) => {
+    Tapetes.forEach((tapete) => {
         if (tapete.stock !== 0) {
             verTapete(tapete);
         }
@@ -75,7 +76,7 @@ const verTapetes = () => {
                 e.target.querySelector("input[name='unidades']").value
             );
 
-            const tapete = tapetes[index];
+            const tapete = Tapetes[index];
 
             if (unidadesPorProducto <= tapete.stock) {
                 agregarAlCarrito(tapete, unidadesPorProducto);
@@ -110,4 +111,4 @@ const actualizarCarrito = () => {
     unidadesCarrito.innerText = cantidadTotal;
 };
 
-verTapetes();
+mostrarTapetes();
