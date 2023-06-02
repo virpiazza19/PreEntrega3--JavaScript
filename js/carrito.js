@@ -38,74 +38,54 @@ const tapetes = [
     }
 ]
 
-/*
-const contenedorTarjetas = document.querySelector("#contenedorTarjetas");
-
-tapetes.forEach(tapete => {
-    const divItem = document.createElement("div");
-    divItem.setAttribute("data-aos", "zoom-in");
-    divItem.className = "items";
-    divItem.innerHTML = `<img class="fotosProductos"
-    src="${tapete.imagen}"
-    alt="${tapete.nombre}">
-<form class="formProducto" id="${tapete.id}">
-    <input type="number" class="form-control" name="unidades" value="1" min="1" max="${tapete.stock}">
-    <button type="submit" class="button carritoButton">Agregar</button>
-</form>`
-
-    contenedorTarjetas.appendChild(divItem);
-});
-*/
+const tapetesSeleccionados = [];
+let cantidadTotal = 0;
 
 const verTapete = ({ id, nombre, stock, imagen }) => {
-    const contenedorTarjetas = document.querySelector("#contenedorTarjetas");
-    const divItem = document.createElement("div");
-    divItem.setAttribute("data-aos", "zoom-in");
-    divItem.className = "items";
-    divItem.innerHTML = `<img class="fotosProductos"
+  const contenedorTarjetas = document.querySelector("#contenedorTarjetas");
+  const divItem = document.createElement("div");
+  divItem.setAttribute("data-aos", "zoom-in");
+  divItem.className = "items";
+  divItem.innerHTML = `<img class="fotosProductos"
     src="${imagen}"
     alt="${nombre}">
-<form class="formProducto" id="${id}">
+  <form class="formProducto" id="${id}">
     <input type="number" class="form-control" name="unidades" value="1" min="1" max="${stock}">
     <button type="submit" class="button carritoButton">Agregar</button>
-</form>`
+  </form>`;
 
-    contenedorTarjetas.appendChild(divItem);
+  contenedorTarjetas.appendChild(divItem);
 };
+
 const verTapetes = () => {
-
-    tapetes.forEach(tapete => {
-        if (tapete.stock != 0) {
-            verTapete(tapete)
-        }
-    })
-}
-verTapetes()
-
-
-
-const tapetesSeleccionados = []
-let cantidadTotal = 0
+  tapetes.forEach(tapete => {
+    if (tapete.stock !== 0) {
+      verTapete(tapete);
+    }
+  });
+};
 
 tapetes.forEach((tapete, index) => {
-    const agregarAlCarrito = document.querySelector(`#${tapete.id}`)
-    agregarAlCarrito.addEventListener("submit", (e) => {
-        e.preventDefault()
-        const unidadesPorProducto = parseInt(e.target.children["unidades"].value)
-        //console.log(tapete.id +" " +unidadesPorProducto)
-        tapetesSeleccionados.push({
-            id: tapetes[index].id,
-            nombre: tapetes[index].nombre,
-            cantidad: unidadesPorProducto
-        })
-        tapetes[index].stock -= unidadesPorProducto
-        console.log(tapetesSeleccionados)
-        cantidadTotal += unidadesPorProducto
-        console.log(cantidadTotal)
-        const unidadesCarrito = document.querySelector(`#unidadesCarrito`)
-        unidadesCarrito.innerText = cantidadTotal
-    })
-})
+  const agregarAlCarrito = document.querySelector(`#${tapete.id}`);
+  agregarAlCarrito.addEventListener("submit", (e) => {
+    e.preventDefault();
+    const unidadesPorProducto = parseInt(e.target.children["unidades"].value);
+    tapetesSeleccionados.push({
+      id: tapetes[index].id,
+      nombre: tapetes[index].nombre,
+      cantidad: unidadesPorProducto
+    });
+    tapetes[index].stock -= unidadesPorProducto;
+    console.log(tapetesSeleccionados);
+    cantidadTotal += unidadesPorProducto;
+    console.log(cantidadTotal);
+    const unidadesCarrito = document.querySelector(`#unidadesCarrito`);
+    unidadesCarrito.innerText = cantidadTotal;
+  });
+});
+
+verTapetes();
+
 
 //Formulario contacto
 class Mensajes {
