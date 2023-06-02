@@ -58,34 +58,53 @@ const verTapete = ({ id, nombre, stock, imagen }) => {
 };
 
 const verTapetes = () => {
-  tapetes.forEach(tapete => {
-    if (tapete.stock !== 0) {
-      verTapete(tapete);
-    }
-  });
-};
-
-tapetes.forEach((tapete, index) => {
-  const agregarAlCarrito = document.querySelector(`#${tapete.id}`);
-  agregarAlCarrito.addEventListener("submit", (e) => {
-    e.preventDefault();
-    const unidadesPorProducto = parseInt(e.target.children["unidades"].value);
-    tapetesSeleccionados.push({
-      id: tapetes[index].id,
-      nombre: tapetes[index].nombre,
-      cantidad: unidadesPorProducto
+    const contenedorTarjetas = document.querySelector("#contenedorTarjetas");
+    contenedorTarjetas.innerHTML = ""; // Limpiar el contenedor antes de volver a agregar los productos
+  
+    tapetes.forEach((tapete) => {
+      if (tapete.stock !== 0) {
+        verTapete(tapete);
+      }
     });
-    tapetes[index].stock -= unidadesPorProducto;
-    console.log(tapetesSeleccionados);
+  
+    const agregarAlCarritoForms = document.querySelectorAll(".formProducto");
+    agregarAlCarritoForms.forEach((agregarAlCarritoForm, index) => {
+      agregarAlCarritoForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        const unidadesPorProducto = parseInt(
+          e.target.querySelector("input[name='unidades']").value
+        );
+  
+        const tapete = tapetes[index];
+  
+        if (unidadesPorProducto <= tapete.stock) {
+          agregarAlCarrito(tapete, unidadesPorProducto);
+        } else {
+          alert("No hay suficiente stock disponible");
+        }
+      });
+    });
+  };
+  
+  const agregarAlCarrito = (tapete, unidadesPorProducto) => {
+    tapetesSeleccionados.push({
+      id: tapete.id,
+      nombre: tapete.nombre,
+      cantidad: unidadesPorProducto,
+    });
+    tapete.stock -= unidadesPorProducto;
     cantidadTotal += unidadesPorProducto;
+    console.log(tapetesSeleccionados);
     console.log(cantidadTotal);
-    const unidadesCarrito = document.querySelector(`#unidadesCarrito`);
+    actualizarCarrito();
+  };
+  
+  const actualizarCarrito = () => {
+    const unidadesCarrito = document.querySelector("#unidadesCarrito");
     unidadesCarrito.innerText = cantidadTotal;
-  });
-});
-
-verTapetes();
-
+  };
+  
+  verTapetes();
 
 //Formulario contacto
 class Mensajes {
