@@ -1,4 +1,3 @@
-//Formulario contacto
 class Mensajes {
     constructor(nombre, apellido, mail, telefono, mensaje) {
         this.nombre = nombre;
@@ -9,9 +8,11 @@ class Mensajes {
     }
 }
 
-const formulario = document.querySelector("#formMensajes");
-formulario.addEventListener("submit", agregarMensaje);
 
+const formulario = document.querySelector("#formMensajes");
+    formulario.addEventListener("submit", agregarMensaje);
+
+// Envío la información del formulario al sessionStorage y reseteo el mismo
 function agregarMensaje(event) {
     event.preventDefault();
 
@@ -24,7 +25,6 @@ function agregarMensaje(event) {
     const nuevoMensaje = new Mensajes(nombre, apellido, mail, telefono, mensaje);
     listaMensajes.push(nuevoMensaje);
 
-    // Guardar la lista de mensajes en el Session Storage
     sessionStorage.setItem("listaMensajes", JSON.stringify(listaMensajes));
 
     console.log(nuevoMensaje);
