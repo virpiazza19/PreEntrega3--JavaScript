@@ -8,7 +8,7 @@ class Mensajes {
     }
 }
 
-//Trae los registros del formulario existentes dentro del localStorage
+//Traigo los registros del formulario existentes dentro del localStorage
 const listaMensajes = () => {
     const mensajesString = localStorage.getItem("listaMensajes");
     if (mensajesString) {
