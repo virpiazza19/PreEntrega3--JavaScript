@@ -9,8 +9,6 @@ class Mensajes {
     }
 }
 
-const listaMensajes = [];
-
 const formulario = document.querySelector("#formMensajes");
 formulario.addEventListener("submit", agregarMensaje);
 
@@ -25,6 +23,9 @@ function agregarMensaje(event) {
 
     const nuevoMensaje = new Mensajes(nombre, apellido, mail, telefono, mensaje);
     listaMensajes.push(nuevoMensaje);
+
+    // Guardar la lista de mensajes en el Session Storage
+    sessionStorage.setItem("listaMensajes", JSON.stringify(listaMensajes));
 
     console.log(nuevoMensaje);
     formulario.reset();

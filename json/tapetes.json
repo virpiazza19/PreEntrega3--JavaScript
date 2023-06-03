@@ -1,0 +1,38 @@
+[
+  {
+    "id": "tapete00001",
+    "nombre": "Alfombra Panaderos",
+    "stock": 10,
+    "imagen": "https://drive.google.com/uc?export=view&id=13FyA0CzHqxTTaGXUdhsh5o3RQPZe5_ED"
+  },
+  {
+    "id": "tapete00002",
+    "nombre": "Alfombra K9",
+    "stock": 9,
+    "imagen": "https://drive.google.com/uc?export=view&id=1g3spd-pdMXTKf1B6WQ5lw3vveNoP6a_2"
+  },
+  {
+    "id": "tapete00003",
+    "nombre": "Alfombra Slices",
+    "stock": 15,
+    "imagen": "https://drive.google.com/uc?export=view&id=1rWN3o_bcQD3fy3_0WO9pP-NEPZldchuX"
+  },
+  {
+    "id": "tapete00004",
+    "nombre": "Alfombra Arcor",
+    "stock": 12,
+    "imagen": "https://drive.google.com/uc?export=view&id=1P-JFzcAhVt0CPZSl3aeP5bCIJSDCxyFY"
+  },
+  {
+    "id": "tapete00005",
+    "nombre": "Alfombra Caramelitos",
+    "stock": 6,
+    "imagen": "https://drive.google.com/uc?export=view&id=18TIaJkK0bjfqF5zogMcoKpxFSJA5P4jl"
+  },
+  {
+    "id": "tapete00006",
+    "nombre": "Alfombra Bajo El Mar",
+    "stock": 1,
+    "imagen": "https://drive.google.com/uc?export=view&id=1XoxonhjIMIOQJhHE8OnqXLTOd2Md6GoL"
+  }
+]

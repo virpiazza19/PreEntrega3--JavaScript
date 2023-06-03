@@ -1,5 +1,5 @@
 //Productos
-const Tapetes = [
+const Alfombras = [
     {
         id: "tapete00001",
         nombre: "Alfombra Panaderos",
@@ -48,7 +48,6 @@ const getTapetesSeleccionados = () => {
 };
 
 const verTapete = ({ id, nombre, stock, imagen }) => {
-
     const contenedorTarjetas = document.querySelector("#contenedorTarjetas");
     const divItem = document.createElement("div");
 
@@ -64,12 +63,11 @@ const verTapete = ({ id, nombre, stock, imagen }) => {
     contenedorTarjetas.appendChild(divItem);
 };
 
-
 const mostrarTapetes = () => {
     const contenedorTarjetas = document.querySelector("#contenedorTarjetas");
     contenedorTarjetas.innerHTML = "";
 
-    Tapetes.forEach((tapete) => {
+    Alfombras.forEach((tapete) => {
         if (tapete.stock !== 0) {
             verTapete(tapete);
         }
@@ -81,7 +79,7 @@ const mostrarTapetes = () => {
             e.preventDefault();
             const unidadesPorProducto = parseInt(e.target.children["unidades"].value);
 
-            const tapete = Tapetes[index];
+            const tapete = Alfombras[index];
 
             if (unidadesPorProducto <= tapete.stock) {
                 agregarAlCarrito(tapete, unidadesPorProducto);
@@ -97,6 +95,7 @@ const mostrarTapetes = () => {
 const agregarAlCarrito = (tapete, unidadesPorProducto) => {
     const tapetesSeleccionados = getTapetesSeleccionados();
     const indexDelProducto = tapetesSeleccionados.findIndex((item) => item.id === tapete.id);
+
     if (indexDelProducto !== -1) {
         tapetesSeleccionados[indexDelProducto].cantidad += unidadesPorProducto;
     } else {
@@ -122,5 +121,9 @@ const actualizarCarrito = () => {
     const cantidadTotal = parseInt(localStorage.getItem("cantidadTotal")) || 0;
     unidadesCarrito.innerText = cantidadTotal;
 };
+
+window.addEventListener("load", () => {
+    actualizarCarrito();
+});
 
 mostrarTapetes();

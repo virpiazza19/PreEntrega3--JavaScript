@@ -18,12 +18,16 @@
         position: absolute;
         right: 10px;
         top: 10px;
-        width: 20px;
-        height: 20px;
+        width: 22px;
+        height: 22px;
         font-family: $font-family_2;
         font-size: 16px;
         border-radius: 50%;
         text-align: center;
 
+    }
+
+    i{
+        padding: 8px 5px 0px 0px;
     }
 }
