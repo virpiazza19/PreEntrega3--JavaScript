@@ -52,7 +52,7 @@ const verTapete = ({ id, nombre, stock, imagen }) => {
                         <h5 class="tituloItem">${nombre}</h5>
                         <form class="formProducto" id="${id}">
                             <input type="number" class="form-control" name="unidades" placeholder="unidades" min="1" max="${stock}">
-                            <button type="submit" class="button carritoButton" id="agregarAlCarrito">Agregar</button>
+                            <button type="submit" class="button carritoButton">Agregar</button>
                         </form>`;
 
     contenedorTarjetas.appendChild(divItem); 
@@ -80,6 +80,8 @@ const mostrarTapetes = () => {
 
             if (unidadesPorProducto <= tapete.stock) {
                 agregarAlCarrito(tapete, unidadesPorProducto);
+
+                agregarAlCarritoForm.reset();
             } else {
                 alert("No hay suficiente stock disponible");
             }
