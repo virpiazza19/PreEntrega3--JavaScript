@@ -79,125 +79,122 @@ const Alfombras = [
         imagen: "https://drive.google.com/uc?export=view&id=1Qau7AnKmZxxX_zsieUlxJkWCRg-m5S6X"
     }
 ]
-  
-  const getTapetesSeleccionados = () => {
+
+//Reviso localStorage para saber que productos se agregaron al carrito
+const getTapetesSeleccionados = () => {
     const tapetesSeleccionadosString = localStorage.getItem("tapetesSeleccionados");
     if (tapetesSeleccionadosString) {
-      return JSON.parse(tapetesSeleccionadosString);
+        return JSON.parse(tapetesSeleccionadosString);
     } else {
-      return [];
+        return [];
     }
-  };
-  
-  const actualizarStockDesdeLocalStorage = () => {
+};
+
+//Reviso el localStorage para calcular el stock real del producto
+const actualizarStockDesdeLocalStorage = () => {
     const tapetesSeleccionados = getTapetesSeleccionados();
     tapetesSeleccionados.forEach((item) => {
-      const tapete = Alfombras.find((prod) => prod.id === item.id);
-      if (tapete) {
-        tapete.stock -= item.cantidad;
-      }
+        const tapete = Alfombras.find((prod) => prod.id === item.id);
+        if (tapete) {
+            tapete.stock -= item.cantidad;
+        }
     });
     actualizarStockEnPagina();
-  };
-  
-  const verTapete = ({ id, nombre, stock, imagen }) => {
+};
+
+// Creo las cards de los productos
+const verTapete = ({ id, nombre, stock, imagen }) => {
     const contenedorTarjetas = document.querySelector("#contenedorTarjetas");
     const divItem = document.createElement("div");
-  
+
     divItem.setAttribute("data-aos", "zoom-in");
     divItem.className = "items";
     divItem.innerHTML = `<img class="fotosProductos" src="${imagen}" alt="${nombre}">
                           <h5 class="tituloItem">${nombre}</h5>
                           <form class="formProducto" id="${id}">
-                              <input type="number" class="form-control" name="unidades" placeholder="${
-      stock === 0 ? "Sin stock" : "unidades"
-    }" min="1" max="${stock}" ${stock === 0 ? "disabled" : ""}>
-                              <button type="submit" class="button carritoButton" ${
-      stock === 0 ? "disabled" : ""
-    }>Agregar</button>
-                              <span class="stockMensaje">${
-                                stock === 0 ? "Sin stock" : `Stock: ${stock}`
-                              }</span>
+                            <input type="number" class="form-control" name="unidades" placeholder="${stock === 0 ? "Sin Stock" : "unidades"}" min="1" max="${stock}" ${stock === 0 ? "disabled" : ""}>
+                            <button type="submit" class="button carritoButton" ${stock === 0 ? "disabled" : ""}>Agregar</button>
+                            <span class="stockMensaje">${stock === 0 ? "Sin stock" : `Stock: ${stock}`}</span>
                           </form>`;
-  
+
     contenedorTarjetas.appendChild(divItem);
-  };
-  
-  const mostrarTapetes = () => {
+};
+
+// Muestro las cards de los productos y realizo la carga de unidades al carrito
+const mostrarTapetes = () => {
     const contenedorTarjetas = document.querySelector("#contenedorTarjetas");
     contenedorTarjetas.innerHTML = "";
-  
+
     Alfombras.forEach((tapete) => {
-      verTapete(tapete);
+        verTapete(tapete);
     });
-  
+
     const agregarAlCarritoForms = document.querySelectorAll(".formProducto");
     agregarAlCarritoForms.forEach((agregarAlCarritoForm, index) => {
-      agregarAlCarritoForm.addEventListener("submit", (e) => {
-        e.preventDefault();
-        const unidadesPorProducto = parseInt(e.target.children["unidades"].value);
-  
-        const tapete = Alfombras[index];
-  
-        if (unidadesPorProducto <= tapete.stock) {
-          agregarAlCarrito(tapete, unidadesPorProducto);
-  
-          agregarAlCarritoForm.reset();
-        }
-      });
+        agregarAlCarritoForm.addEventListener("submit", (e) => {
+            e.preventDefault();
+            const unidadesPorProducto = parseInt(e.target.children["unidades"].value);
+            const tapete = Alfombras[index];
+            agregarAlCarrito(tapete, unidadesPorProducto);
+            agregarAlCarritoForm.reset();
+
+        });
     });
-  };
-  
-  const agregarAlCarrito = (tapete, unidadesPorProducto) => {
+};
+
+// Cuando agrego al carrito chequeo si ya había agregado antes el producto para sumar las unidades, caso contrario crea el nuevo registro. 
+const agregarAlCarrito = (tapete, unidadesPorProducto) => {
     const tapetesSeleccionados = getTapetesSeleccionados();
     const indexDelProducto = tapetesSeleccionados.findIndex((item) => item.id === tapete.id);
-  
+
     if (indexDelProducto !== -1) {
-      tapetesSeleccionados[indexDelProducto].cantidad += unidadesPorProducto;
+        tapetesSeleccionados[indexDelProducto].cantidad += unidadesPorProducto;
     } else {
-      tapetesSeleccionados.push({
-        id: tapete.id,
-        nombre: tapete.nombre,
-        cantidad: unidadesPorProducto,
-      });
+        tapetesSeleccionados.push({
+            id: tapete.id,
+            nombre: tapete.nombre,
+            cantidad: unidadesPorProducto,
+        });
     }
-  
+
     tapete.stock -= unidadesPorProducto;
     localStorage.setItem("tapetesSeleccionados", JSON.stringify(tapetesSeleccionados));
-  
+
     let cantidadTotal = parseInt(localStorage.getItem("cantidadTotal")) || 0;
     cantidadTotal += unidadesPorProducto;
     localStorage.setItem("cantidadTotal", cantidadTotal.toString());
-  
+
     actualizarCarrito();
     actualizarStockEnPagina();
-  };
-  
-  const actualizarStockEnPagina = () => {
+};
+
+// Actualizo stock que se muestra en las cards a medida que se carga el producto en el carrito
+const actualizarStockEnPagina = () => {
     const tarjetasProductos = document.querySelectorAll(".formProducto");
     tarjetasProductos.forEach((tarjeta) => {
-      const idProducto = tarjeta.getAttribute("id");
-      const tapete = Alfombras.find((prod) => prod.id === idProducto);
-      const stockMensaje = tarjeta.querySelector(".stockMensaje");
-      stockMensaje.textContent = tapete.stock === 0 ? "Sin stock" : `Stock: ${tapete.stock}`;
+        const idProducto = tarjeta.getAttribute("id");
+        const tapete = Alfombras.find((prod) => prod.id === idProducto);
+        const stockMensaje = tarjeta.querySelector(".stockMensaje");
+        stockMensaje.textContent = tapete.stock === 0 ? "Sin stock" : `Stock: ${tapete.stock}`;
     });
-  };
-  
-  const actualizarCarrito = () => {
+};
+
+// Actualizar el número reflejado en el ícono del carrito
+const actualizarCarrito = () => {
     const unidadesCarrito = document.querySelector("#unidadesCarrito");
     const cantidadTotal = parseInt(localStorage.getItem("cantidadTotal")) || 0;
     unidadesCarrito.innerText = cantidadTotal;
-  };
-  
-  window.addEventListener("load", () => {
+};
+
+// Chequeo el localStorag cuando se recarga la página para mostrar los datos correctos
+window.addEventListener("load", () => {
     const tapetesSeleccionados = getTapetesSeleccionados();
     if (tapetesSeleccionados.length > 0) {
-      actualizarStockDesdeLocalStorage();
+        actualizarStockDesdeLocalStorage();
     }
     mostrarTapetes();
     actualizarCarrito();
     actualizarStockEnPagina();
-  });
-  
-  mostrarTapetes();
-  
+});
+
+mostrarTapetes();
