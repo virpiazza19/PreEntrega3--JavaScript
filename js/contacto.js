@@ -8,12 +8,21 @@ class Mensajes {
     }
 }
 
-const listaMensajes = [];
+//Trae los registros del formulario existentes dentro del localStorage
+const listaMensajes = () => {
+    const mensajesString = localStorage.getItem("listaMensajes");
+    if (mensajesString) {
+        return JSON.parse(mensajesString);
+    } else {
+        return [];
+    }
+};
 
+// Ejecuto la función de agregarMensaje cuando aprieto el botón de submit
 const formulario = document.querySelector("#formMensajes");
 formulario.addEventListener("submit", agregarMensaje);
 
-// Envío la información del formulario al sessionStorage y reseteo el mismo
+// Función para agregar mensajes al localStorage
 function agregarMensaje(event) {
     event.preventDefault();
 
@@ -24,10 +33,9 @@ function agregarMensaje(event) {
     const mensaje = event.target.mensaje.value;
 
     const nuevoMensaje = new Mensajes(nombre, apellido, mail, telefono, mensaje);
-    listaMensajes.push(nuevoMensaje);
+    const mensajes = listaMensajes();
+    mensajes.push(nuevoMensaje); 
 
-    sessionStorage.setItem("listaMensajes", JSON.stringify(listaMensajes));
-
-    console.log(nuevoMensaje);
+    localStorage.setItem("listaMensajes", JSON.stringify(mensajes));
     formulario.reset();
 }
