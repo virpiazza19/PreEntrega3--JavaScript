@@ -264,6 +264,15 @@ footer ul li a .nav-link:target {
   flex: 1;
   margin: 0px 5px;
 }
+.formProducto input:disabled {
+  border-color: firebrick;
+  color: black;
+  background-color: rgba(45, 43, 43, 0.9215686275);
+}
+.formProducto input:disabled::placeholder {
+  color: black;
+  opacity: 1;
+}
 .formProducto button {
   flex: 1;
   margin: 0px 5px;
@@ -416,6 +425,14 @@ input {
 }
 .button:hover {
   background-color: firebrick;
+  color: black;
+}
+.button:disabled {
+  color: black;
+  background-color: rgba(45, 43, 43, 0.9215686275);
+}
+.button:disabled:hover {
+  background-color: rgba(45, 43, 43, 0.9215686275);
   color: black;
 }
 

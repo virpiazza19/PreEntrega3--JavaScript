@@ -112,9 +112,9 @@ const verTapete = ({ id, nombre, stock, imagen }) => {
     divItem.innerHTML = `<img class="fotosProductos" src="${imagen}" alt="${nombre}">
                           <h5 class="tituloItem">${nombre}</h5>
                           <form class="formProducto" id="${id}">
+                          <span class="stockMensaje">${stock === 0 ? "Sin stock" : `Stock: ${stock}`}</span>
                             <input type="number" class="form-control" name="unidades" placeholder="${stock === 0 ? "Sin Stock" : "unidades"}" min="1" max="${stock}" ${stock === 0 ? "disabled" : ""}>
                             <button type="submit" class="button carritoButton" ${stock === 0 ? "disabled" : ""}>Agregar</button>
-                            <span class="stockMensaje">${stock === 0 ? "Sin stock" : `Stock: ${stock}`}</span>
                           </form>`;
 
     contenedorTarjetas.appendChild(divItem);

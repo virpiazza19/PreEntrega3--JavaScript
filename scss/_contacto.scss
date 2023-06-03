@@ -105,4 +105,12 @@ input {
 		background-color: $background-color_5;
 		color: $color_5;
 	}
+	&:disabled{
+		color:$color_5;
+		background-color: $background-color_6;
+	}
+	&:disabled:hover{
+		background-color: $background-color_6;
+		color: $color_5;
+	}
 }
