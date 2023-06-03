@@ -38,8 +38,14 @@ const Tapetes = [
     }
 ]
 
-const tapetesSeleccionados = [];
-let cantidadTotal = 0;
+const getTapetesSeleccionados = () => {
+    const tapetesSeleccionadosString = localStorage.getItem("tapetesSeleccionados");
+    if (tapetesSeleccionadosString) {
+        return JSON.parse(tapetesSeleccionadosString);
+    } else {
+        return [];
+    }
+};
 
 const verTapete = ({ id, nombre, stock, imagen }) => {
 
@@ -55,8 +61,9 @@ const verTapete = ({ id, nombre, stock, imagen }) => {
                             <button type="submit" class="button carritoButton">Agregar</button>
                         </form>`;
 
-    contenedorTarjetas.appendChild(divItem); 
+    contenedorTarjetas.appendChild(divItem);
 };
+
 
 const mostrarTapetes = () => {
     const contenedorTarjetas = document.querySelector("#contenedorTarjetas");
@@ -72,9 +79,7 @@ const mostrarTapetes = () => {
     agregarAlCarritoForms.forEach((agregarAlCarritoForm, index) => {
         agregarAlCarritoForm.addEventListener("submit", (e) => {
             e.preventDefault();
-            const unidadesPorProducto = parseInt(
-                e.target.querySelector("input[name='unidades']").value
-            );
+            const unidadesPorProducto = parseInt(e.target.children["unidades"].value);
 
             const tapete = Tapetes[index];
 
@@ -90,7 +95,8 @@ const mostrarTapetes = () => {
 };
 
 const agregarAlCarrito = (tapete, unidadesPorProducto) => {
-    const indexDelProducto = tapetesSeleccionados.findIndex(item => item.id === tapete.id);
+    const tapetesSeleccionados = getTapetesSeleccionados();
+    const indexDelProducto = tapetesSeleccionados.findIndex((item) => item.id === tapete.id);
     if (indexDelProducto !== -1) {
         tapetesSeleccionados[indexDelProducto].cantidad += unidadesPorProducto;
     } else {
@@ -102,14 +108,18 @@ const agregarAlCarrito = (tapete, unidadesPorProducto) => {
     }
 
     tapete.stock -= unidadesPorProducto;
+    localStorage.setItem("tapetesSeleccionados", JSON.stringify(tapetesSeleccionados));
+
+    let cantidadTotal = parseInt(localStorage.getItem("cantidadTotal")) || 0;
     cantidadTotal += unidadesPorProducto;
-    console.log(tapetesSeleccionados);
-    console.log(cantidadTotal);
+    localStorage.setItem("cantidadTotal", cantidadTotal.toString());
+
     actualizarCarrito();
 };
 
 const actualizarCarrito = () => {
     const unidadesCarrito = document.querySelector("#unidadesCarrito");
+    const cantidadTotal = parseInt(localStorage.getItem("cantidadTotal")) || 0;
     unidadesCarrito.innerText = cantidadTotal;
 };
 

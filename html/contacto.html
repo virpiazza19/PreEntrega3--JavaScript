@@ -74,24 +74,24 @@
             <form class="formDiv" id="formMensajes">
                 <div class="mb-3">
                     <label for="name" class="form-label formFonts">Nombre</label>
-                    <input type="text" name="nombre" class="form-control" placeholder="Ingrese su nombre" id="name">
+                    <input type="text" name="nombre" class="form-control" placeholder="Ingrese su nombre" id="name" required>
                 </div>
                 <div class="mb-3">
                     <label for="lastname" class="form-label formFonts">Apellido</label>
-                    <input type="text" name="apellido" class="form-control" placeholder="Ingrese su apellido" id="lastname">
+                    <input type="text" name="apellido" class="form-control" placeholder="Ingrese su apellido" id="lastname" required>
                 </div>
                 <div class="mb-3">
                     <label for="email" class="form-label formFonts">Mail</label>
-                    <input type="email" name="mail" class="form-control" placeholder="Ingrese su email" id="email">
+                    <input type="email" name="mail" class="form-control" placeholder="Ingrese su email" id="email" required>
                 </div>
                 <div class="mb-3">
                     <label for="phone" class="form-label formFonts">Teléfono</label>
                     <input type="tel" name="telefono" class="form-control" placeholder="Ingrese su teléfono con código de área"
-                        id="phone">
+                        id="phone" required>
                 </div>
                 <div class="mb-3">
                     <label for="message" class="form-label">Mensaje</label>
-                    <textarea class="form-control" name="mensaje" placeholder="Deje su mensaje" id="message" rows="3"></textarea>
+                    <textarea class="form-control" name="mensaje" placeholder="Deje su mensaje" id="message" rows="3" required></textarea>
                 </div>
                 <div><input type="submit" class="button" label="Enviar">
                     <input type="reset" class="button" label="Resetear">
