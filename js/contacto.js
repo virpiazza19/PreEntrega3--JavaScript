@@ -8,9 +8,10 @@ class Mensajes {
     }
 }
 
+const listaMensajes = [];
 
 const formulario = document.querySelector("#formMensajes");
-    formulario.addEventListener("submit", agregarMensaje);
+formulario.addEventListener("submit", agregarMensaje);
 
 // Envío la información del formulario al sessionStorage y reseteo el mismo
 function agregarMensaje(event) {
