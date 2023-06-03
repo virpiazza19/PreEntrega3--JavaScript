@@ -35,6 +35,48 @@ const Alfombras = [
         nombre: "Alfombra Bajo El Mar",
         stock: 1,
         imagen: "https://drive.google.com/uc?export=view&id=1XoxonhjIMIOQJhHE8OnqXLTOd2Md6GoL"
+    },
+    {
+        id: "tapete00007",
+        nombre: "Alfombra Yumi",
+        stock: 30,
+        imagen: "https://drive.google.com/uc?export=view&id=1FFZXc9zQEuXSmlEzAXstjA7WedOCvwo3"
+    },
+    {
+        id: "tapete00008",
+        nombre: "Alfombra Montagne",
+        stock: 7,
+        imagen: "https://drive.google.com/uc?export=view&id=1MfSq3kcjwVMckf8vY8RZfe5XbHji-4KG"
+    },
+    {
+        id: "tapete00009",
+        nombre: "Alfombra Maxikioso Pablito",
+        stock: 18,
+        imagen: "https://drive.google.com/uc?export=view&id=1QzncQYptYlswDeh3TpyT-Iam98iVA7i_"
+    },
+    {
+        id: "tapete00010",
+        nombre: "Alfombra Harmatiuk",
+        stock: 1,
+        imagen: "https://drive.google.com/uc?export=view&id=1PvBfuxV_nrzR7nvECLSVYdQrbSZ2-cJ7"
+    },
+    {
+        id: "tapete00011",
+        nombre: "Alfombra Harley Davidson",
+        stock: 0,
+        imagen: "https://drive.google.com/uc?export=view&id=1IDjN4cnC75TI_Yifxxvn1J6dHl9NyJw-"
+    },
+    {
+        id: "tapete00012",
+        nombre: "Alfombra Dakros Maxikiosko",
+        stock: 10,
+        imagen: "https://drive.google.com/uc?export=view&id=1wO8DWpI10QAR5dpMmE_DrPRuleZ3ICSq"
+    },
+    {
+        id: "tapete00012",
+        nombre: "Alfombra Bigg",
+        stock: 10,
+        imagen: "https://drive.google.com/uc?export=view&id=1Qau7AnKmZxxX_zsieUlxJkWCRg-m5S6X"
     }
 ]
 
